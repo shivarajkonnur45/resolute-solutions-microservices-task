@@ -1,0 +1,100 @@
+version: "3.8"
+
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: b6EO6Xn3Nwug
+      MYSQL_DATABASE: clientlient
+      MYSQL_USER: root
+      MYSQL_PASSWORD: b6EO6Xn3Nwug
+    env_file:
+      - ./mysql/.env
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    command: redis-server --requirepass myredispassword
+    env_file:
+      - ./redis/.env
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping", "--raw", "-a", "myredispassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=b6EO6Xn3Nwug
+      - DB_DATABASE=clientlient
+      - JWT_SECRET=9lkeFOhxt5
+      - SECRET=bco0njJ3OTzunxNxXShOqsQImCyvagKP
+      - HTTP_REQUEST_SECRET_KEY=b4365ed7a1ed00f705f4bff7e7f4e977cdc14f4c3b967f0d38e57ab1552b1497
+      - HTTP_REQUEST_ADMIN=http://192.168.29.169:4000/api/v1
+    env_file:
+      - ./admin/.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  client-steaming:
+    build:
+      context: ./client-steaming
+      dockerfile: Dockerfile
+    ports:
+      - "3200:3200"
+    environment:
+      - PORT=3200
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=b6EO6Xn3Nwug
+      - DB_DATABASE=clientlient
+    env_file:
+      - ./client-steaming/.env
+    depends_on:
+      - mysql
+
+  clientlient:
+    build:
+      context: ./clientlient
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASS=b6EO6Xn3Nwug
+      - DB_DATABASE=clientlient
+      - JWT_SECRET=9lkeFOhxt5
+      - SECRET=bco0njJ3OTzunxNxXShOqsQImCyvagKP
+      - HTTP_REQUEST_SECRET_KEY=b4365ed7a1ed00f705f4bff7e7f4e977cdc14f4c3b967f0d38e57ab1552b1497
+      - HTTP_REQUEST_CLIENT_STREAM=http://192.168.29.169:3200/api/v1
+    env_file:
+      - ./clientlient/.env
+    depends_on:
+      - mysql
+      - redis
+

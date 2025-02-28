@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup OTP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                monospace;
+        }
+
+      
+        .top-heading {
+            color: #0C0C14;
+            font-family: Inter;
+            font-size: 26.797px;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .backdrop {
+            min-height: 90vh;
+            height: 100%;
+            flex-direction: column;
+            background-image: url("../img/bgline.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            gap: 38px;
+            display: flex;
+            align-items: center;
+
+        }
+
+        .box {
+
+            max-width: 40vw;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 15px;
+            border: 1px solid #d7d7d7;
+            text-align: center;
+            box-shadow: 0px 2px 8px 0px rgba(158, 119, 237, 0.20) !important;
+
+        }
+
+
+
+        .txt-20 {
+            font-size: 20px;
+        }
+
+
+        .order_1 {
+            order: 1;
+        }
+
+        .order_2 {
+            order: 2;
+        }
+
+        .txt-roboto-normal {
+            color: #000;
+            font-family: Roboto;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        .txt-violet {
+            color: #8837F4 !important;
+
+        }
+
+        .txt-14 {
+            font-size: 14px;
+        }
+
+        .txt-16 {
+            font-size: 16px;
+        }
+
+        
+
+
+        .txt-16-700 {
+            font-weight: 700;
+            line-height: 20px;
+            font-size: 16px;
+        }
+
+        .otp_div {
+            padding: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .otp {
+            color: #8837F4;
+            line-height: 20px;
+            letter-spacing: 17px;
+            font-family: Inter;
+            font-size: 36px;
+            padding: 11.711px 13px 13.289px 13px;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        @media (max-width: 520px) {
+            .box {
+                padding: 10px;
+                margin-top: 24px;
+                max-width: 90vw;
+            }
+
+            .order_1 {
+                order: 2;
+                margin-top: -37px;
+            }
+
+            .order_2 {
+                order: 1;
+
+            }
+
+            .txt-roboto-normal {
+                font-size: 14px;
+                line-height: 22px;
+            }
+
+          
+            .top-heading {
+                font-size: 18px;
+                line-height: 29px;
+            }
+
+            .txt-normal-heading {
+                font-size: 16px !important;
+            }
+
+            .mt-small {
+                margin-top: 7px !important;
+            }
+
+            .backdrop {
+                gap: 20px;
+            }
+
+
+        }
+
+        @media (min-width: 521px) and (max-width:880px) {
+            .box {
+                max-width: 87vw;
+            }
+
+            .violet_container {
+                margin-inline: 10px !important;
+                padding: 20px;
+            }
+
+
+           
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-temp">
+      
+        <div class="backdrop">
+            <p class="top-heading" style="text-align: left;margin-top: 30px;">{Header}</p>
+            <div class="box">
+                <div style="display: flex;justify-content: left;padding: 20px 19px;">
+
+                    <img src="../img/EdbitionLogo.svg" alt="">
+                </div>
+                <div
+                    style="display: flex; flex-direction: column;gap: 24px;justify-content: center;align-items: center;">
+
+                    <p class="top-heading ">{Title}</p>
+
+                </div>
+                <div class="otp_div">
+                    
+                    <p class="otp">{otp}</p>
+
+                </div>
+
+                <p class="txt-roboto-normal txt-16" style="margin-bottom: 40px;">{Time_limit_content} {Time_limit}
+                    {Time_type}.</p>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                monospace;
+        }
+
+        .top-sec {
+            border-bottom: 2px solid #D7D7D7;
+            padding: 42px;
+            background: #FFF;
+        }
+
+        .top-heading {
+            color: #000;
+            font-family: Inter;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px;
+        }
+
+        .backdrop {
+            min-height: 90vh;
+            height: 100%;
+            flex-direction: column;
+            background-image: url("https://dev.edbition.com/Email/bgline.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            gap: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .txt-violet {
+            color: #8837F4 !important;
+
+        }
+
+        .box {
+            margin-top: 50px;
+            max-width: 80vw;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 15px;
+            border: 1px solid #d7d7d7;
+            text-align: center;
+            box-shadow: 0px 2px 8px 0px rgba(158, 119, 237, 0.20) !important;
+
+        }
+
+        .footer_part {
+            max-width: 80vw;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 33px;
+            justify-content: left;
+            /* align-items: center; */
+        }
+
+        .txt-20 {
+            font-size: 20px;
+        }
+        .violet_container {
+            border-radius: 12px;
+            border: 1px solid #8837F4;
+            background: #FFF;
+            padding: 24px 30.39px 23px 32px;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .txt-roboto-normal {
+            color: #000;
+            font-family: Roboto;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        .txt-14 {
+            font-size: 14px;
+        }
+        .txt-16 {
+            font-size: 16px;
+        }
+        .light_txt {
+            color: #424242;
+            text-align: center;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        @media (max-width: 520px) {
+    .box{
+        padding: 10px;
+        margin-top: 24px;
+        max-width: 90vw;
+    }
+ 
+    .txt-roboto-normal{
+font-size: 14px;
+line-height: 22px;
+    }
+    .top-sec {
+        padding: 24px 18px;
+    }
+    .top-heading{
+        font-size: 18px;
+        line-height: 29px;
+    }
+    .txt-normal-heading {
+        font-size: 16px !important;
+    }
+    .backdrop {
+        gap: 20px;
+    }
+  
+    .d_flex_flex_column {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer_part {
+        gap: 10px;
+    }
+  
+}
+@media (min-width: 521px) and (max-width:880px){
+    .box{
+        max-width: 87vw;
+    }
+    .footer_part{
+        gap: 20px;
+    }
+    .d_flex_flex_column {
+        margin-block:20px !important;
+    }
+    .top-sec {
+        padding: 30px;
+    }
+   
+    
+}
+    </style>
+</head>
+
+<body>
+    <div class="email-temp">
+        <!-- <div class="top-sec">
+            <p class="top-heading">{Subject}</p>
+
+        </div> -->
+        <div class="backdrop">
+            <div class="box">
+                <div style="display: flex;justify-content: left;padding: 20px 19px;">
+
+                    <img src="https://dev.edbition.com/Email/EdbitionLogo.png" alt="">
+                </div>
+               
+                <div style="display: flex;flex-direction: column;gap: 20px;align-items: start;padding-left: 40px;">
+                  
+                    <p class="txt-roboto-normal txt-16">{Greetings} [Customer's Name],</p>
+                    <p class="txt-roboto-normal txt-16">{Email_body}</p>
+    
+                </div>
+                <div style="display: flex;gap: 20px;
+                justify-content: flex-start;align-items: center;margin-top: 60px; margin-bottom: 30px;margin-left: 20px;">
+                    <img src="https://dev.edbition.com/Email/profilepic.png" alt="">
+                    <div>
+                        <p class="normal_text" style="font-weight: 600;text-align: left;">David C.</p>
+                        <p class="normal_text" style="text-align: left;">Client Experience Representative</p>
+                        <p class=" normal_text txt-violet" style="text-decoration: underline;text-align: left;">
+                            david@ebition.com</p>
+                    </div>
+
+                </div>
+                
+              
+            </div>
+            <div class="footer_part">
+                <div style="display: flex;flex-direction: column;gap: 10px;margin-bottom: 30px;">
+                    <div>
+                        <img src="https://dev.edbition.com/Email/EdbitionLogo.png" alt="">
+                    </div>
+                   
+                    <p class="txt-roboto-normal txt-14" style="font-weight: 600;color: #424242;">Learning never stops.</p>
+                    <p class="txt-roboto-normal txt-14" style="font-weight: 400;">www.edbition.com</p>
+    
+                </div>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

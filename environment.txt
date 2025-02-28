@@ -1,0 +1,162 @@
+version: "3.8"
+
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: b6EO6Xn3Nwug # Replace with your actual root password
+      MYSQL_DATABASE: clientlient
+      MYSQL_USER: root
+      MYSQL_PASSWORD: b6EO6Xn3Nwug
+    env_file:
+      - ./mysql/.env
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    command: redis-server --requirepass myredispassword # Replace with your redis password
+    env_file:
+      - ./redis/.env
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping", "--raw", "-a", "myredispassword"] # Replace with your redis password
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - DB_HOST=mysql
+      - DB_USER=myappuser
+      - DB_PASS=myapppassword
+      - DB_DATABASE=platform
+      - JWT_SECRET=your_jwt_secret # Replace
+      - SECRET=your_secret # Replace
+      - TEST=your_test_value # Replace
+      - HTTP_REQUEST_CLIENTLIENT=http://clientlient:3001/api/v1/
+      - HTTP_REQUEST_CLIENT_STREAM=http://client-steaming:3200/api/v1/
+      - HTTP_REQUEST_ADMIN=http://admin:4000/api/v1/
+      - HTTP_REQUEST_CLIENT_ACTVITY_LOG=http://activity-log-app:3100/api/v1
+      - HTTP_REQUEST_TECHLOG=http://techlog-app:3400/api/v1
+      - HTTP_REQUEST_SECRET_KEY=your_http_secret # Replace
+      - SQS_CLIENTLIENT_URL=your_sqs_client_url # Replace
+      - SQS_TECHLOG_URL=your_sqs_techlog_url # Replace
+      - SQS_STREAMING_URL=your_sqs_streaming_url # Replace
+      - SQS_ACTIVITY_URL=your_sqs_activity_url # Replace
+      - SQS_API_VERSION=2012-11-05
+      - SQS_REGION=ca-central-1
+      - VIDEO_ROUTE=weird-right?-we-donot-show-it
+      - VIDEO_ROUTE_AUTH=weird-right?-we-donot-show-it
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=myredispassword
+      - EMAIL=your_email # Replace
+      - PASS=your_email_password # Replace
+    env_file:
+      - ./admin/.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  client-steaming:
+    build:
+      context: ./client-steaming
+      dockerfile: Dockerfile
+    ports:
+      - "3200:3200"
+    environment:
+      - PORT=3200
+      - DB_HOST=mysql
+      - DB_USER=myappuser
+      - DB_PASS=myapppassword
+      - DB_DATABASE=clientstreaming
+      - JWT_SECRET=your_jwt_secret # Replace
+      - SECRET=your_secret # Replace
+      - TEST=your_test_value # Replace
+      - HTTP_REQUEST_CLIENTLIENT=http://clientlient:3001/api/v1/
+      - HTTP_REQUEST_CLIENT_STREAM=http://client-steaming:3200/api/v1/
+      - HTTP_REQUEST_ADMIN=http://admin:4000/api/v1/
+      - HTTP_REQUEST_CLIENT_ACTVITY_LOG=http://activity-log-app:3100/api/v1
+      - HTTP_REQUEST_TECHLOG=http://techlog-app:3400/api/v1
+      - HTTP_REQUEST_SECRET_KEY=your_http_secret # Replace
+      - SQS_CLIENTLIENT_URL=your_sqs_client_url # Replace
+      - SQS_TECHLOG_URL=your_sqs_techlog_url # Replace
+      - SQS_STREAMING_URL=your_sqs_streaming_url # Replace
+      - SQS_API_VERSION=2012-11-05
+      - SQS_REGION=ca-central-1
+    env_file:
+      - ./client-steaming/.env
+    depends_on:
+      - mysql
+
+  clientlient:
+    build:
+      context: ./clientlient
+      dockerfile: Dockerfile
+    ports:
+      - "3010:3010"
+    environment:
+      - PORT=3001
+      - DB_HOST=mysql
+      - DB_USER=myappuser
+      - DB_PASS=myapppassword
+      - DB_DATABASE=clientlient
+      - JWT_SECRET=your_jwt_secret # Replace
+      - SECRET=your_secret # Replace
+      - TEST=your_test_value # Replace
+      - HTTP_REQUEST_CLIENTLIENT=http://clientlient:3001/api/v1/
+      - HTTP_REQUEST_CLIENT_STREAM=http://client-steaming:3200/api/v1/
+      - HTTP_REQUEST_ADMIN=http://admin:4000/api/v1/
+      - HTTP_REQUEST_CLIENT_ACTVITY_LOG=http://activity-log-app:3100/api/v1
+      - HTTP_REQUEST_TECHLOG=http://techlog-app:3400/api/v1
+      - VIDEO_DETECTION_URL=your_video_detection_url # Replace
+      - RESPONSE_VALIDATOR=your_response_validator # Replace
+      - HTTP_REQUEST_SECRET_KEY=your_http_secret # Replace
+      - SQS_CLIENTLIENT_URL=your_sqs_client_url # Replace
+      - SQS_TECHLOG_URL=your_sqs_techlog_url # Replace
+      - SQS_STREAMING_URL=your_sqs_streaming_url # Replace
+      - SQS_API_VERSION=2012-11-05
+      - SQS_REGION=ca-central-1
+      - EMAILUSER=your_email_user # Replace
+      - EMAILPASSWORD=your_email_password # Replace
+      - STRIPE_Publishable_key=your_stripe_publishable_key # Replace
+      - Secretkey=your_stripe_secret_key # Replace
+      - TESTING_CLI=your_testing_cli # Replace
+      - CLIENT_ID=your_google_client_id # Replace
+      - CLIENT_ID_LOCAL=your_google_client_id_local # Replace
+      - EMAIL=your_email # Replace
+      - PASS=your_email_password # Replace
+      - VIDEO_ROUTE=your_video_route # Replace
+      - VIDEO_ROUTE_AUTH=your_video_route_auth # Replace
+      - TRANSCRIPT_ROUTE=your_transcript_route # Replace
+      - EMAIL_COUNT=10
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=myredispassword # Replace
+    env_file:
+      - ./clientlient/.env
+    depends_on:
+      - mysql
+      - redis
+  
+    volumes:
+      - ./clientlient/volume/portfolio:/app/

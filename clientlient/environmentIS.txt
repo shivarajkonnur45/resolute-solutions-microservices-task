@@ -1,0 +1,16 @@
+PORT = '3001'
+DB_HOST = 'lms-dev-mysql-db.c5wak60cmo3u.ca-central-1.rds.amazonaws.com'
+DB_USER = 'root'
+DB_PASS = "b6EO6Xn3Nwug"
+DB_DATABASE = 'clientlient'
+SECRET = 'bco0njJ3OTzunxNxXShOqsQImCyvagKP'
+JWT_SECRET = '9lkeFOhxt5'
+HTTP_REQUEST_SECRET_KEY = 'b4365ed7a1ed00f705f4bff7e7f4e977cdc14f4c3b967f0d38e57ab1552b1497'
+HTTP_REQUEST_ADMIN = 'http://192.168.29.169:4000/api/v1'
+
+HTTP_REQUEST_CLIENT_STREAM = 'http://192.168.29.169:3200/api/v1'
+SQS_CLIENTLIENT_URL = 'https://sqs.ca-central-1.amazonaws.com/992382519158/dev-admin-dlq.fifo'
+SQS_API_VERSION = '2012-11-05'
+SQS_REGION = 'ca-central-1'
+EMAILUSER=ashish@resolutesolutions.in
+EMAILPASSWORD=Ashish@12345

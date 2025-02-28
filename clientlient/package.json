@@ -1,0 +1,51 @@
+{
+  "name": "express-backend-articture",
+  "version": "1.0.0",
+  "description": "Node Js Express Backend Architect ",
+  "main": "clientlient.js",
+  "scripts": {
+    "start": "nodemon clientlient.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohdsahil/node-express-backend-articture.git"
+  },
+  "author": "Mohd Sahil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohdsahil/node-express-backend-articture/issues"
+  },
+  "homepage": "https://github.com/Mohdsahil/node-express-backend-articture#readme",
+  "dependencies": {
+    "nodemon": "^3.1.9",
+    "archiver": "^7.0.1",
+    "aws-sdk": "^2.1620.0",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "canvas": "^3.0.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "fs-extra": "^11.2.0",
+    "google-auth-library": "^9.11.0",
+    "joi": "^17.12.3",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.9.7",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14",
+    "otp-generator": "^4.0.1",
+    "pdf-parse": "^1.1.1",
+    "redis": "^4.7.0",
+    "sequelize": "^6.37.3",
+    "sib-api-v3-sdk": "^8.5.0",
+    "stripe": "^15.12.0",
+    "tesseract.js": "^5.1.0",
+    "uuid": "^10.0.0",
+    "word-extractor": "^1.0.4"
+  }
+}

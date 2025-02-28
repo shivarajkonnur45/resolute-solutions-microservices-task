@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Payment Method</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    /* Add some basic styling */
+    #card-element {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    #error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add Payment Method</h1>
+  <form id="payment-form">
+    <div id="card-element"></div>
+    <button type="submit">Submit Payment</button>
+  </form>
+  <div id="error-message"></div>
+
+  <script>
+    // Replace with your own publishable key
+    const stripe = Stripe('pk_test_51Otc07EFuOGljmniS7rCbtzdFY505khMEUPo1UcYJ65wGRS3SGCXF3N5pekYWLhxNoML2zl8pUmAUaWWhiVwjBCf00CQPpYOBR');
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+
+    const form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      });
+
+      if (error) {
+        document.getElementById('error-message').innerText = error.message;
+      } else {
+        // Send paymentMethod.id to your server
+        fetch('/add-payment-method', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paymentMethodId: paymentMethod.id, customerId: 'cus_QKjf8ODaTeQJmb' }),
+        }).then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              document.getElementById('error-message').innerText = data.error;
+            } else {
+              document.getElementById('error-message').innerText = 'Payment method added successfully!';
+            }
+          });
+      }
+    });
+  </script>
+</body>
+</html>
